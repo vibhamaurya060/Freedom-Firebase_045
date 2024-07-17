@@ -1,16 +1,19 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
+import "./App.css";
+import AppNavbar from "./componets/AppNavBar";
+import Footer from "./componets/Footer";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   return (
     <>
-      <h2>Event</h2>
+      <AppNavbar />
+      <Footer />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
