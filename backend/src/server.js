@@ -2,7 +2,9 @@ import express from 'express';
 import {config} from 'dotenv';
 import ConnectToDb from './configs/db.js';
 import cors from 'cors';
-import router from './routes/authRoutes.js';
+import userRouter from './routes/userRoute.js';
+import eventRouter from './routes/eventRoute.js';
+
 
 
 config();
@@ -18,7 +20,8 @@ app.get('/',(req, res)=>{
   res.send('This is home route');
 })
 
-app.use('/api/auth', router); 
+app.use("/users",userRouter) 
+app.use("/events", eventRouter)
 
 app.listen(PORT, async()=>{
     try{
