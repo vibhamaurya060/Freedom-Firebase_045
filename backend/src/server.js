@@ -6,7 +6,6 @@ import userRouter from './routes/userRoute.js';
 import eventRouter from './routes/eventRoute.js';
 
 
-
 config();
 const app=express();
 
