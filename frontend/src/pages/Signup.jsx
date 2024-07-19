@@ -1,3 +1,12 @@
+// import React from 'react'
+
+// export const SignUp = () => {
+//   return (
+//     <div>SignUp</div>
+//   )
+// }
+
+
 import React, { useState } from 'react';
 import { Box, Input, Button, Heading, Center, Flex, useToast, Select } from '@chakra-ui/react';
 import axios from 'axios';
@@ -5,7 +14,7 @@ import { FaRegTimesCircle} from 'react-icons/fa';
 import { FaRegCircleCheck } from 'react-icons/fa6';
 import { useNavigate } from 'react-router-dom';
 
-export function Signup() {
+export function SignUp() {
   const [userData, setUserData] = useState({
     email: '',
     username: '',
@@ -255,3 +264,4 @@ export function Signup() {
     </Center>
   );
 }
+
