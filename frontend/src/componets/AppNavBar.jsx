@@ -132,13 +132,13 @@ function AppNavbar({ data, setData }) {
           <Link href="/" fontWeight={500}>
             Home
           </Link>
-          <Link href="/findEvents" fontWeight={500}>
+          <Link href="/find" fontWeight={500}>
             Find Events
           </Link>
-          <Link href="/bookedEvents" fontWeight={500}>
+          <Link href="/bookevent" fontWeight={500}>
             Booked Events
           </Link>
-          <Link href="/creator" fontWeight={500} onClick={handleCreateEvent}>
+          <Link href="/createEvents" fontWeight={500} onClick={handleCreateEvent}>
             Create Events
           </Link>
           {login ? (
@@ -149,10 +149,10 @@ function AppNavbar({ data, setData }) {
             </>
           ) : (
             <>
-              <Link href="/auth" fontWeight={500}>
+              <Link href="/login" fontWeight={500}>
                 Login
               </Link>
-              <Link href="/auth" fontWeight={500}>
+              <Link href="/signUp" fontWeight={500}>
                 Sign Up
               </Link>
             </>
@@ -176,7 +176,7 @@ function AppNavbar({ data, setData }) {
             <Link href="/" fontWeight={500}>
               Home
             </Link>
-            <Link href="/findEvents" fontWeight={500}>
+            <Link href="/find" fontWeight={500}>
               Find Events
             </Link>
             <Link href="/creator" fontWeight={500} onClick={handleCreateEvent}>
@@ -190,10 +190,10 @@ function AppNavbar({ data, setData }) {
               </>
             ) : (
               <>
-                <Link href="/auth" fontWeight={500}>
+                <Link href="/login" fontWeight={500}>
                   Login
                 </Link>
-                <Link href="/auth" fontWeight={500}>
+                <Link href="/signup" fontWeight={500}>
                   Sign Up
                 </Link>
               </>
