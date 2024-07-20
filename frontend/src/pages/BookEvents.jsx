@@ -13,7 +13,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import Footer from "../componets/Footer";
 import AppNavbar from "../componets/AppNavBar";
 
-const BookEvents = () => {
+ const BookEvents = () => {
   const [isSmallerScreen] = useMediaQuery("(max-width: 768px)");
   const scrollRef = useRef(null);
   const [scrollLeft, setScrollLeft] = useState(0);
