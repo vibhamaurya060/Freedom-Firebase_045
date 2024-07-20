@@ -1,0 +1,117 @@
+/* General Container Styles */
+.center-container {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Arial', sans-serif;
+    background-image: url("https://img.freepik.com/premium-photo/wedding-guests-celebrating-beautiful-outdoor-venue-sunny-day-luxury-wedding-decoration-idea-decor-inspiration-with-flowers-party-event-celebration-garden-estate-generative-ai_360074-64556.jpg");
+    background-position: center;
+    background-size: cover;
+  }
+ 
+  .login-box {
+    width: 30%;
+    height: 55vh;
+    background: linear-gradient(135deg, #f6d0db, #fff5f9);
+    padding: 40px 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s;
+  }
+  
+  .login-box:hover {
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Heading Styles */
+  .login-heading {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+    font-weight: bold;
+  }
+  
+  /* Input Styles */
+  .login-input {
+    margin-bottom: 16px;
+    height: 40px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 0 12px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+  }
+  
+  .login-input:focus {
+    border-color: #ff7e67;
+    outline: none;
+  }
+  
+  .password-input-group {
+    margin-bottom: 12px;
+  }
+  
+  .toggle-password-button {
+    border: none;
+    background-color: white;
+    box-shadow: none;
+    color: #ff7e67;
+    transition: color 0.3s;
+  }
+  
+  .toggle-password-button:hover {
+    color: #ff6347;
+  }
+  
+  /* Error Message Styles */
+  .error-message {
+    padding-bottom: 10px;
+    color: red;
+    text-align: center;
+    font-weight: bold;
+    margin-top: -8px;
+  }
+  
+  /* Button Styles */
+  .login-button {
+    background-color: #ff7e67;
+    width: 100%;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 17px;
+    color: white;
+    margin-top: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+  }
+  
+  .login-button:hover {
+    background-color: #fcb687;
+    transform: translateY(-2px);
+  }
+  
+  /* Signup Link Styles */
+  .signup-container {
+    margin-top: 15px;
+    text-align: center;
+  }
+  
+  .signup-link {
+    color: #fcce93;
+    font-size: 17px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+  
+  .signup-link:hover {
+    color: #ff6347;
+  }
+  

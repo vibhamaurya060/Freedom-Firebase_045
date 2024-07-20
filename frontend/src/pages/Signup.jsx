@@ -1,18 +1,10 @@
-// import React from 'react'
-
-// export const SignUp = () => {
-//   return (
-//     <div>SignUp</div>
-//   )
-// }
-
-
 import React, { useState } from 'react';
 import { Box, Input, Button, Heading, Center, Flex, useToast, Select } from '@chakra-ui/react';
 import axios from 'axios';
-import { FaRegTimesCircle} from 'react-icons/fa';
+import { FaRegTimesCircle } from 'react-icons/fa';
 import { FaRegCircleCheck } from 'react-icons/fa6';
 import { useNavigate } from 'react-router-dom';
+import '../styles/SignUp.css'; // Import the CSS file
 
 export function Signup() {
   const [userData, setUserData] = useState({
@@ -62,7 +54,7 @@ export function Signup() {
       userData.role // Ensure role is selected
     ) {
       axios
-        .post('http://localhost:8080/api/auth/register', userData)
+        .post('https://freedom-firebase-045.onrender.com/users/register', userData)
         .then((res) => {
           toast({
             title: 'Account created successfully.',
@@ -92,56 +84,38 @@ export function Signup() {
   };
 
   return (
-    <Center h="100vh" w="100vw">
-      <Box maxW="md" mx="auto" mt="8">
-        <Heading as="h2" mb="4" textAlign="center" size="lg">
+    <Center className="center-container">
+      <Box className="signup-box">
+        <Heading as="h2" className="signup-heading" size="lg">
           Sign Up
         </Heading>
-        <Box
-          mt="30px"
-          bg="white"
-          p="30"
-          pt="40px"
-          rounded="lg"
-          boxShadow="rgba(0, 0, 0, 0.35) 0px 5px 15px"
-        >
+        <Box className="form-container">
           <form onSubmit={handleSubmit}>
             <Input
-              mb="14"
-              w="350px"
-              height="40px"
+              className="signup-input"
               name="username"
               placeholder="Username"
               onChange={handleChange}
               value={userData.username}
             />
-            <br />
             <Input
-              mb="14"
-              w="350px"
-              height="40px"
+              className="signup-input"
               name="email"
               type="email"
               placeholder="Email"
               onChange={handleChange}
               value={userData.email}
             />
-            <br />
             <Input
-              mb="14"
+              className="signup-input"
               name="password"
               type="password"
-              w="350px"
-              height="40px"
               placeholder="Password"
               onChange={handleChange}
               value={userData.password}
             />
-            <br />
             <Select
-              mb="14"
-              w="350px"
-              height="40px"
+              className="signup-select"
               name="role"
               placeholder="Select Role"
               onChange={handleChange}
@@ -150,110 +124,69 @@ export function Signup() {
               <option value="user">User</option>
               <option value="admin">Admin</option>
             </Select>
-            <br />
 
             {passBox && (
               <div style={{ paddingBottom: '20px' }}>
-                <Flex alignItems="center" h="30px">
+                <Flex alignItems="center" className="validation-item">
                   {passwordValid.length ? (
-                    <FaRegCircleCheck style={{ color: 'green' }} />
+                    <FaRegCircleCheck className="validation-icon validation-valid" />
                   ) : (
-                    <FaRegTimesCircle style={{ color: 'red' }} />
+                    <FaRegTimesCircle className="validation-icon validation-invalid" />
                   )}
-                  <p
-                    style={{
-                      color: passwordValid.length ? 'green' : 'red',
-                      paddingLeft: '2%',
-                    }}
-                  >
+                  <p className={`validation-text ${passwordValid.length ? 'validation-valid' : 'validation-invalid'}`}>
                     Minimum 8 characters
                   </p>
                 </Flex>
-                <Flex alignItems="center" h="30px">
+                <Flex alignItems="center" className="validation-item">
                   {passwordValid.lowercase ? (
-                    <FaRegCircleCheck style={{ color: 'green' }} />
+                    <FaRegCircleCheck className="validation-icon validation-valid" />
                   ) : (
-                    <FaRegTimesCircle style={{ color: 'red' }} />
+                    <FaRegTimesCircle className="validation-icon validation-invalid" />
                   )}
-                  <p
-                    style={{
-                      color: passwordValid.lowercase ? 'green' : 'red',
-                      paddingLeft: '2%',
-                    }}
-                  >
+                  <p className={`validation-text ${passwordValid.lowercase ? 'validation-valid' : 'validation-invalid'}`}>
                     At least one lowercase letter
                   </p>
                 </Flex>
-                <Flex alignItems="center" h="30px">
+                <Flex alignItems="center" className="validation-item">
                   {passwordValid.uppercase ? (
-                    <FaRegCircleCheck style={{ color: 'green' }} />
+                    <FaRegCircleCheck className="validation-icon validation-valid" />
                   ) : (
-                    <FaRegTimesCircle style={{ color: 'red' }} />
+                    <FaRegTimesCircle className="validation-icon validation-invalid" />
                   )}
-                  <p
-                    style={{
-                      color: passwordValid.uppercase ? 'green' : 'red',
-                      paddingLeft: '2%',
-                    }}
-                  >
+                  <p className={`validation-text ${passwordValid.uppercase ? 'validation-valid' : 'validation-invalid'}`}>
                     At least one uppercase letter
                   </p>
                 </Flex>
-                <Flex alignItems="center" h="30px">
+                <Flex alignItems="center" className="validation-item">
                   {passwordValid.numbers ? (
-                    <FaRegCircleCheck style={{ color: 'green' }} />
+                    <FaRegCircleCheck className="validation-icon validation-valid" />
                   ) : (
-                    <FaRegTimesCircle style={{ color: 'red' }} />
+                    <FaRegTimesCircle className="validation-icon validation-invalid" />
                   )}
-                  <p
-                    style={{
-                      color: passwordValid.numbers ? 'green' : 'red',
-                      paddingLeft: '2%',
-                    }}
-                  >
+                  <p className={`validation-text ${passwordValid.numbers ? 'validation-valid' : 'validation-invalid'}`}>
                     At least one number
                   </p>
                 </Flex>
-                <Flex alignItems="center" h="30px">
+                <Flex alignItems="center" className="validation-item">
                   {passwordValid.specialChar ? (
-                    <FaRegCircleCheck style={{ color: 'green' }} />
+                    <FaRegCircleCheck className="validation-icon validation-valid" />
                   ) : (
-                    <FaRegTimesCircle style={{ color: 'red' }} />
+                    <FaRegTimesCircle className="validation-icon validation-invalid" />
                   )}
-                  <p
-                    style={{
-                      color: passwordValid.specialChar ? 'green' : 'red',
-                      paddingLeft: '2%',
-                    }}
-                  >
+                  <p className={`validation-text ${passwordValid.specialChar ? 'validation-valid' : 'validation-invalid'}`}>
                     At least one special character
                   </p>
                 </Flex>
               </div>
             )}
-            <Button
-              type="submit"
-              colorScheme="blue"
-              width="350px"
-              borderRadius="5px"
-              color="white"
-              backgroundColor="skyblue"
-              border="none"
-              height="40px"
-              marginTop="10px"
-            >
+            <Button type="submit" className="signup-button">
               Sign Up
             </Button>
           </form>
           <Box mt={4} textAlign="center">
             <Button
               variant="link"
-              color="skyblue"
-              fontWeight="600"
-              fontSize="18px"
-              border="lightGray"
-              backgroundColor="white"
-              marginTop="15px"
+              className="login-link"
               onClick={() => navigate('/login')}
             >
               Login
@@ -264,4 +197,3 @@ export function Signup() {
     </Center>
   );
 }
-
