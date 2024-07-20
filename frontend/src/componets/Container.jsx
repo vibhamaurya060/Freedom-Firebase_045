@@ -128,6 +128,32 @@ const events = [
     comments: [],
     ratings: [],
   },
+  {
+    _id: "669942a4cc9e32f4a35596c1",
+    title: "Startup Expo 2024",
+    description:
+      "An expo showcasing the most innovative startups and tech companies.",
+    eventDate: "2024-08-10",
+    organizer: "admin",
+    category: "Business",
+    imageUrl: [
+      "https://is360expo.com/wp-content/uploads/2021/06/Startup-Expo.jpg",
+      "https://indienergy.in/wp-content/uploads/2023/05/WhatsApp-Image-2023-06-27-at-17.59.12-1024x682.jpeg",
+    ],
+    eventPlaner: "6698bc4cdaf588607d8fd9f7",
+    eventBooked: [],
+    time: "10:00 AM",
+    mode: "Hybrid",
+    price: 99.99,
+    location: "San Francisco, CA",
+    ticketTypes: ["Early Bird", "Standard", "VIP"],
+    favorites: [],
+    status: "upcoming",
+    capacity: 2000,
+    attendees: [],
+    comments: [],
+    ratings: [],
+  },
 ];
 
 const EventCard = ({ event }) => {

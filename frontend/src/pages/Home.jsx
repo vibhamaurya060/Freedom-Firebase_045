@@ -7,6 +7,7 @@ import WelcomeSection from "../componets/WelcomSection";
 import VideosSection from "../componets/vedioSection";
 import Service from "../componets/Service";
 import EventsPage from "../componets/Container";
+import BoookEvents from "./BookEvents";
 
 export const Home = () => {
   return (
@@ -17,6 +18,7 @@ export const Home = () => {
       <EventsPage />
       <Service />
       <VideosSection />
+
       <Footer />
     </>
   );
