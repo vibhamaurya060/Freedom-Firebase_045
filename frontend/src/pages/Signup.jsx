@@ -14,7 +14,7 @@ import { FaRegTimesCircle} from 'react-icons/fa';
 import { FaRegCircleCheck } from 'react-icons/fa6';
 import { useNavigate } from 'react-router-dom';
 
-export function SignUp() {
+export function Signup() {
   const [userData, setUserData] = useState({
     email: '',
     username: '',

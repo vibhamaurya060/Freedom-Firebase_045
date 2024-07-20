@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import eventBanner from '../../src/assets/eventBanner.jpeg';
 import '../styles/find.css'; 
 import axios from 'axios';
@@ -6,31 +6,67 @@ import axios from 'axios';
 export const Find = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [events, setEvents] = useState([]);
+  const [filteredEvents, setFilteredEvents] = useState([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const eventsPerPage = 9; // Changed from 10 to 9
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
   };
 
-  useEffect(() => {
-    const fetchEventData = async () => {
-      try {
-        const response = await axios.get("https://freedom-firebase-045.onrender.com/events");
-        console.log('API Response:', response.data);
-
-        // Assuming the API response contains an array of events
-        setEvents(response.data.events);
-        setIsLoading(false);
-      } catch (error) {
-        console.error('Error fetching events:', error);
-        setError(error.message);
-        setIsLoading(false);
-      }
+  const debounce = (func, delay) => {
+    let timeoutId;
+    return (...args) => {
+      if (timeoutId) clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        func(...args);
+      }, delay);
     };
+  };
 
+  const fetchEventData = async () => {
+    try {
+      const response = await axios.get("http://localhost:8080/events");
+      console.log('API Response:', response.data);
+
+      // Assuming the API response contains an array of events
+      setEvents(response.data.events);
+      setFilteredEvents(response.data.events);
+      setIsLoading(false);
+    } catch (error) {
+      console.error('Error fetching events:', error);
+      setError(error.message);
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
     fetchEventData();
   }, []);
+
+  const filterEvents = useCallback(debounce((term) => {
+    setCurrentPage(1); // Reset to first page on search
+    if (term) {
+      const filtered = events.filter(event => event.title.toLowerCase().includes(term.toLowerCase()));
+      setFilteredEvents(filtered);
+    } else {
+      setFilteredEvents(events);
+    }
+  }, 300), [events]);
+
+  useEffect(() => {
+    filterEvents(searchTerm);
+  }, [searchTerm, filterEvents]);
+
+  const indexOfLastEvent = currentPage * eventsPerPage;
+  const indexOfFirstEvent = indexOfLastEvent - eventsPerPage;
+  const currentEvents = filteredEvents.slice(indexOfFirstEvent, indexOfLastEvent);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  const totalPages = Math.ceil(filteredEvents.length / eventsPerPage);
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
@@ -51,7 +87,7 @@ export const Find = () => {
         />
       </div>
       <div className="events-grid">
-        {events.map((event) => (
+        {currentEvents.map((event) => (
           <div key={event._id} className="event-card">
             <img src={event.imageUrl[0]} alt={event.title} className="event-image" />
             <h5>{event.title}</h5>
@@ -59,6 +95,17 @@ export const Find = () => {
             <p>{event.description}</p>
             <button className="details-button">Details</button>
           </div>
+        ))}
+      </div>
+      <div className="pagination">
+        {[...Array(totalPages).keys()].map(number => (
+          <button
+            key={number + 1}
+            onClick={() => paginate(number + 1)}
+            className={`page-button ${currentPage === number + 1 ? 'active' : ''}`}
+          >
+            {number + 1}
+          </button>
         ))}
       </div>
     </div>
