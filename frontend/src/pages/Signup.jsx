@@ -6,7 +6,7 @@ import { FaRegCircleCheck } from 'react-icons/fa6';
 import { useNavigate } from 'react-router-dom';
 import '../styles/SignUp.css'; // Import the CSS file
 
-export function SignUp() {
+export function Signup() {
   const [userData, setUserData] = useState({
     email: '',
     username: '',
