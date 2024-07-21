@@ -1,47 +1,57 @@
-// Eventdetails.js
+// components/EventDetail.js
+
 import React, { useEffect, useState } from 'react';
+import { formatEventData } from '../utils/eventUtils';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
 
 export const Eventdetails = () => {
-  const { id } = useParams();
+  const { eventPlaner } = useParams(); 
   const [event, setEvent] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const fetchEventDetails = async () => {
-      try {
-        const response = await axios.get(`http://localhost:8080/events/${id}`);
-        setEvent(response.data);
-        setIsLoading(false);
-      } catch (error) {
-        console.error('Error fetching event details:', error);
-        setError(error.message);
-        setIsLoading(false);
-      }
-    };
+    if (eventPlaner) {
+      fetch(`https://freedom-firebase-045.onrender.com/events/${eventPlaner}`)
+        .then(response => response.json())
+        .then(data => {
+          setEvent(data.event); // Adjust according to your API response structure
+          setLoading(false);
+        })
+        .catch(error => {
+          setError(error);
+          setLoading(false);
+        });
+    } else {
+      setError(new Error('No event ID provided.'));
+      setLoading(false);
+    }
+  }, [eventPlaner]);
 
-    fetchEventDetails();
-  }, [id]);
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error loading event data: {error.message}</p>;
+  if (!event) return <p>No event data available.</p>;
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  const formattedEvent = formatEventData(event);
 
   return (
-    <div>
-      {event && (
-        <>
-          <h1>{event.title}</h1>
-          <img src={event.imageUrl[0]} alt={event.title} />
-          <p>{event.description}</p>
-          <h4>Location: {event.location}</h4>
-          <h4>Price: ${event.price}</h4>
-          <h4>Date: {event.eventDate}</h4>
-          <h4>Time: {event.time}</h4>
-          <h4>Category: {event.category}</h4>
-        </>
-      )}
+    <div className="event-detail">
+      <h2>{formattedEvent.title}</h2>
+      <img src={formattedEvent.image} alt={formattedEvent.title} />
+      <p><strong>Description:</strong> {formattedEvent.description}</p>
+      <p><strong>Date:</strong> {formattedEvent.date}</p>
+      <p><strong>Time:</strong> {formattedEvent.time}</p>
+      <p><strong>Location:</strong> {formattedEvent.location}</p>
+      <p><strong>Price:</strong> {formattedEvent.price}</p>
+      <p><strong>Mode:</strong> {formattedEvent.mode}</p>
+      <p><strong>Capacity:</strong> {formattedEvent.capacity}</p>
+      <p><strong>Status:</strong> {formattedEvent.status}</p>
+      <p><strong>Ticket Types:</strong> {formattedEvent.ticketTypes}</p>
+      <p><strong>Comments:</strong> {formattedEvent.comments}</p>
+      <p><strong>Ratings:</strong> {formattedEvent.ratings}</p>
     </div>
   );
 };
+
+
+

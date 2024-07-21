@@ -21,7 +21,7 @@ const event = async (req, res) => {
     if (!eventData) { 
       return res.status(404).json({ error: true, message: "You have not created any event yet" });
     }
-    res.status(200).json({ error: false, eventData });
+    res.status(200).json({eventData });
   } catch (error) {
     console.error("Error fetching event data:", error);
     res.status(500).json({ error: true, message: "Internal Server Error" });

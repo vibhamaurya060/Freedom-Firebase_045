@@ -33,7 +33,7 @@ export const Find = () => {
 
   const fetchEventData = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/events");
+      const response = await axios.get("https://freedom-firebase-045.onrender.com/events");
       console.log('API Response:', response.data);
 
       // Assuming the API response contains an array of events
