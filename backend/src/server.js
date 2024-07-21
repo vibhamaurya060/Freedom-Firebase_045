@@ -6,6 +6,7 @@ import userRouter from './routes/userRoute.js';
 import eventRouter from './routes/eventRoute.js';
 
 
+
 config();
 const app=express();
 
@@ -21,6 +22,7 @@ app.get('/',(req, res)=>{
 
 app.use("/users",userRouter) 
 app.use("/events", eventRouter)
+
 
 app.listen(PORT, async()=>{
     try{

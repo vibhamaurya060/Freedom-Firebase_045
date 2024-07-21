@@ -1,7 +1,9 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom'; 
 import eventBanner from '../../src/assets/eventBanner.jpeg';
 import '../styles/find.css'; 
 import axios from 'axios';
+import { Eventdetails } from './Eventdetails';
 
 export const Find = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -11,6 +13,9 @@ export const Find = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const eventsPerPage = 9; // Changed from 10 to 9
+
+  const navigate = useNavigate(); // Initialize navigate
+
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
@@ -93,7 +98,7 @@ export const Find = () => {
             <h5>{event.title}</h5>
             <h6>Location: {event.location}</h6>
             <p>{event.description}</p>
-            <button className="details-button">Details</button>
+            <button className="details-button" onClick={() => navigate(`/eventdetails/${event.eventPlaner}`)} >Details</button>
           </div>
         ))}
       </div>
