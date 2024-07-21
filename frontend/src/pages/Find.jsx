@@ -98,7 +98,7 @@ export const Find = () => {
             <h5>{event.title}</h5>
             <h6>Location: {event.location}</h6>
             <p>{event.description}</p>
-            <button className="details-button" onClick={() => navigate(`/eventdetails/${event.eventPlaner}`)} >Details</button>
+            <button className="details-button" onClick={() => navigate(`/eventDetails/${event.eventPlaner}`)} >Details</button>
           </div>
         ))}
       </div>
