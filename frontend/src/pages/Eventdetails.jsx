@@ -12,7 +12,7 @@ export const Eventdetails = () => {
 
   useEffect(() => {
     if (eventPlaner) {
-      fetch(`https://freedom-firebase-045.onrender.com/events/${eventPlaner}`)
+      fetch(`https://freedom-firebase-045.onrender.com/events/${eventPlaner.eventData}`)
         .then(response => response.json())
         .then(data => {
           setEvent(data.event); // Adjust according to your API response structure
