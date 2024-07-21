@@ -14,21 +14,19 @@ const getEvents = async (req, res) => {
 };
 
 
-
 const event = async (req, res) => {
-    const { id } = req.params; 
-    try {
-      const eventData = await EventModel.find({ eventPlaner: id });
-      if (!eventData) { 
-        return res.status(404).json({ error: true, message: "You have not creted any event yet" });
-      }
-      res.status(200).json({ error: false, eventData });
-    } catch (error) {
-      console.log(error);
-      res.status(500).json({ error: true, message: error.message });
+  const { id } = req.params; 
+  try {
+    const eventData = await EventModel.findOne({ eventPlaner: id });
+    if (!eventData) { 
+      return res.status(404).json({ error: true, message: "You have not created any event yet" });
     }
-  };
-  
+    res.status(200).json({ error: false, eventData });
+  } catch (error) {
+    console.error("Error fetching event data:", error);
+    res.status(500).json({ error: true, message: "Internal Server Error" });
+  }
+};
   
 
   const getBookedEvent = async (req, res) => {
@@ -138,27 +136,34 @@ const deleteEvent = async (req, res) => {
 
 
 
+
 const addComment = async (req, res) => {
-    const { id } = req.params;
-    const { comment } = req.body;
-    const userId = req.user.userID;
-  
-    try {
-      const event = await EventModel.findById(id);
+  const { eventId, userId, comment } = req.body; // Ensure 'comment' is used instead of 'comments'
+  try {
+      console.log("Received data:", { eventId, userId, comment });
+
+      const event = await EventModel.findById(eventId);
+      
       if (!event) {
-        return res.status(404).json({ success: false, message: "Event not found" });
+          return res.status(404).json({ success: false, message: "Event not found" });
       }
-  
-      event.comments.push({ user: userId, comment });
+
+      const newComment = {
+          user: userId,
+          comment // Ensure 'comment' is used instead of 'comments'
+      };
+
+      console.log("New Comment:", newComment);  // Debugging statement to verify new comment
+
+      event.comments.push(newComment);
       await event.save();
-  
-      res.status(200).json({ success: true, message: "Comment added successfully" });
-    } catch (error) {
-      console.error("Error adding comment:", error);
+
+      res.status(201).json({ success: true, message: "Comment added successfully", comment: newComment });
+  } catch (error) {
+      console.error("Error posting comment:", error);
       res.status(500).json({ success: false, message: "Internal Server Error", error: error.message });
-    }
-  };
-  
+  }
+};
 
   const rateEvent = async (req, res) => {
     const { id } = req.params;
