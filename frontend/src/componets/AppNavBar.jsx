@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   Box,
   Flex,
@@ -33,7 +33,6 @@ function AppNavbar({ data, setData }) {
   const toast = useToast();
 
   useEffect(() => {
-    handleSearch();
     const token = localStorage.getItem("token");
     if (token) {
       setLogin(true);
@@ -138,7 +137,11 @@ function AppNavbar({ data, setData }) {
           <Link href="/bookevent" fontWeight={500}>
             Booked Events
           </Link>
-          <Link href="/createEvents" fontWeight={500} onClick={handleCreateEvent}>
+          <Link
+            href="/createEvents"
+            fontWeight={500}
+            onClick={handleCreateEvent}
+          >
             Create Events
           </Link>
           {login ? (

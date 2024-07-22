@@ -4,6 +4,8 @@ import ConnectToDb from './configs/db.js';
 import cors from 'cors';
 import userRouter from './routes/userRoute.js';
 import eventRouter from './routes/eventRoute.js';
+import detailRouter from './routes/eventdetailRoute.js';
+
 
 
 config();
@@ -21,6 +23,8 @@ app.get('/',(req, res)=>{
 
 app.use("/users",userRouter) 
 app.use("/events", eventRouter)
+app.use('/details',detailRouter)
+
 
 app.listen(PORT, async()=>{
     try{

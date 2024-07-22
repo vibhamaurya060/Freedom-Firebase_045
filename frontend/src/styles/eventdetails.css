@@ -1,0 +1,98 @@
+/* styles/EventDetails.css */
+.eventBack{
+  background-image: url("https://images.inc.com/uploaded_files/image/1920x1080/getty_479977238_253066.jpg");
+  background-position: center;
+  background-size: cover;
+  margin-top: -20px;
+  padding-top: 20px;
+}
+.event-detail {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background: linear-gradient(135deg, #f6d0db, #fff5f9);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
+  color: #333;
+}
+
+.event-detail h2 {
+  text-align: center;
+  font-size: 2em;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.event-detail img {
+  width: 100%;
+  height: auto;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.event-detail p {
+  font-size: 1.1em;
+  color: #555;
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+.event-detail p strong {
+  color: #333;
+}
+
+.event-detail .event-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.event-detail .event-meta p {
+  flex: 1 1 calc(50% - 10px);
+  margin: 10px 0;
+}
+
+.event-detail .event-meta select {
+  width: 100%;
+  padding: 5px;
+  font-size: 1em;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.event-detail .star {
+  font-size: 1.5em;
+  color: #ccc;
+  margin-right: 5px;
+  transition: color 0.2s;
+}
+
+.event-detail .star.filled {
+  color: #ffd700; /* Yellow color for filled stars */
+}
+
+.event-detail .star-rating {
+  display: flex;
+  align-items: center;
+}
+.book{
+  width: 200px;
+  height: 40px;
+  border: none;
+  background-color: rgb(182, 182, 237);
+  border-radius: 5px;
+  margin-left: 280px;
+}
+
+@media (max-width: 600px) {
+  .event-detail .event-meta p {
+    flex: 1 1 100%;
+  }
+}

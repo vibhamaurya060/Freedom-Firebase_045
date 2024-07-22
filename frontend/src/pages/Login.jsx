@@ -1,12 +1,3 @@
-// import React from 'react'
-
-// export const Login = () => {
-//   return (
-//     <div>Login</div>
-//   )
-// }
-
-
 import React, { useState } from "react";
 import {
   Center,
@@ -21,10 +12,12 @@ import {
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "../styles/Login.css"; // Import the CSS file
+
 
 export function Login() {
   const navigate = useNavigate();
-  const [userData, setUserData] = useState({ email: "", password: "" }); // Renamed pass to password
+  const [userData, setUserData] = useState({ email: "", password: "" });
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -45,11 +38,11 @@ export function Login() {
     e.preventDefault();
     setLoading(true);
     axios
-      .post("http://localhost:8080/api/auth/login", userData)
+      .post("https://freedom-firebase-045.onrender.com/users/login", userData)
       .then((res) => {
         setLoading(false);
         const { token, role } = res.data;
-        localStorage.setItem("fitbuddy", JSON.stringify({ token, role })); // Store under "fitbuddy" key
+        localStorage.setItem("fitbuddy", JSON.stringify({ token, role }));
         navigate("/");
       })
       .catch((error) => {
@@ -59,97 +52,54 @@ export function Login() {
   };
 
   return (
-    <Center h="100vh" w="100vw">
-      <Box maxW="md" mx="auto" mt="8">
-        <Heading as="h2" mb="15" textAlign="center" size="lg">
+    <Center className="center-container">
+      <Box className="login-box">
+        <Heading as="h2" className="login-heading" size="lg">
           Login
         </Heading>
-        <Box
-          bg="white"
-          p="25"
-          pt="40px"
-          rounded="lg"
-          boxShadow="rgba(0, 0, 0, 0.35) 0px 5px 15px"
-        >
-          <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
+          <Input
+            className="login-input"
+            name="email"
+            type="email"
+            placeholder="Email"
+            onChange={handleChange}
+            value={userData.email}
+          />
+          <InputGroup className="password-input-group" size="md">
             <Input
-              mb="16"
-              name="email"
-              type="email"
-              height="40px"
-              width="350px"
-              placeholder="Email"
+              className="login-input"
+              name="password"
+              type={showPassword ? "text" : "password"}
+              placeholder="Password"
+              value={userData.password}
               onChange={handleChange}
-              value={userData.email}
             />
-            <br />
-            <InputGroup size="md">
-              <Input
-                mb="12"
-                name="password" // Changed from "pass" to "password"
-                type={showPassword ? "text" : "password"} // Toggle between text and password type
-                placeholder="Password"
-                height="40px"
-                width="350px"
-                value={userData.password} // Updated to "password"
-                onChange={handleChange}
+            <InputRightElement>
+              <IconButton
+                aria-label={showPassword ? "Hide password" : "Show password"}
+                variant="unstyled"
+                onClick={handleTogglePassword}
+                icon={showPassword ? <ViewOffIcon /> : <ViewIcon />}
+                className="toggle-password-button"
               />
-              <InputRightElement
-                width="3rem"
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-                position="absolute"
-                right="0"
-                height="100%"
-              >
-                <IconButton
-                  aria-label={showPassword ? "Hide password" : "Show password"}
-                  variant="unstyled"
-                  onClick={handleTogglePassword}
-                  icon={showPassword ? <ViewOffIcon /> : <ViewIcon />}
-                  _focus={{ boxShadow: "none" }}
-                  marginBottom="10px"
-                  border="none"
-                  backgroundColor="white"
-                />
-              </InputRightElement>
-            </InputGroup>
-            {error && (
-              <p style={{ paddingBottom: "10px", color: "red" }}>{error}</p>
-            )}
-            <br />
-            <Button
-              type="submit"
-              backgroundColor="skyblue"
-              width="350px"
-              height="40px"
-              border="none"
-              borderRadius="5px"
-              fontWeight="600"
-              fontSize="17px"
-              color="white"
-              marginTop="15px"
-              disabled={loading}
-            >
-              {loading ? "Logging in..." : "Login"}
-            </Button>
-          </form>
-          <Box mt={4} textAlign="center">
-            <Button
-              variant="link"
-              color="skyblue"
-              fontSize="17px"
-              fontWeight="600"
-              border="none"
-              backgroundColor="white"
-              marginTop="15px"
-              onClick={() => navigate("/signup")}
-            >
-              Create new Account
-            </Button>
-          </Box>
+            </InputRightElement>
+          </InputGroup>
+          {error && <p className="error-message">{error}</p>}
+          <Button className="login-button" type="submit" disabled={loading}>
+            {loading ? "Logging in..." : "Login"}
+          </Button>
+        </form>
+        <Box className="signup-container">
+          <Button
+            variant="link"
+            className="signup-link"
+            onClick={() => navigate("/signup")}
+          >
+            Create new Account
+          </Button>
         </Box>
+     
       </Box>
     </Center>
   );
