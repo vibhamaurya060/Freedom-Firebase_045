@@ -11,17 +11,35 @@ import BookEvents from '../pages/BookEvents';
 
 
 export const Allrouters = () => {
-  return (
-    <>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/find" element={<Find />} />
-        <Route path="/bookevent" element={<BookEvents />} />
-        <Route path="/createEvents" element={<CreateEvents />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/eventdetails/:id" element={<Eventdetails />} />
-      </Routes>
-    </>
-  );
-};
+
+    return (
+        <>
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/find" element={<Find />} />
+                <Route path="/bookevent" element={<BookEvents />} />
+                <Route path="/createEvents" element={<CreateEvents />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<Signup />} />
+                <Route path="/eventdetails/:id" element={<Eventdetails />} />
+            </Routes>
+        </>
+    )
+}
+
+
+//   return (
+//     <>
+//       <Routes>
+//         <Route path="/" element={<Home />} />
+//         <Route path="/find" element={<Find />} />
+//         <Route path="/bookevent" element={<BookEvents />} />
+//         <Route path="/createEvents" element={<CreateEvents />} />
+//         <Route path="/login" element={<Login />} />
+//         <Route path="/signup" element={<Signup />} />
+//         <Route path="/eventdetails/:id" element={<Eventdetails />} />
+//       </Routes>
+//     </>
+//   );
+// };
+
