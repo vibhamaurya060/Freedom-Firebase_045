@@ -1,18 +1,18 @@
-// components/EventDetail.js
+// components/EventDetails.js
 
 import React, { useEffect, useState } from 'react';
 import { formatEventData } from '../utils/eventUtils';
 import { useParams } from 'react-router-dom';
 
 export const Eventdetails = () => {
-  const { eventPlaner } = useParams(); 
+  const { title } = useParams(); 
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (eventPlaner) {
-      fetch(`https://freedom-firebase-045.onrender.com/events/${eventPlaner.eventData}`)
+    if (title) {
+      fetch(`https://freedom-firebase-045.onrender.com/events/title/${(title.toString())}`)
         .then(response => response.json())
         .then(data => {
           setEvent(data.event); // Adjust according to your API response structure
@@ -23,10 +23,10 @@ export const Eventdetails = () => {
           setLoading(false);
         });
     } else {
-      setError(new Error('No event ID provided.'));
+      setError(new Error('No event title provided.'));
       setLoading(false);
     }
-  }, [eventPlaner]);
+  }, [title]);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error loading event data: {error.message}</p>;
@@ -52,6 +52,3 @@ export const Eventdetails = () => {
     </div>
   );
 };
-
-
-
