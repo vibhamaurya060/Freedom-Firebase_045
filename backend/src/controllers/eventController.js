@@ -27,6 +27,8 @@ const event = async (req, res) => {
     res.status(500).json({ error: true, message: "Internal Server Error" });
   }
 };
+
+
   
 
   const getBookedEvent = async (req, res) => {

@@ -1,9 +1,10 @@
+// components/Find.js
+
 import React, { useEffect, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom'; 
 import eventBanner from '../../src/assets/eventBanner.jpeg';
 import '../styles/find.css'; 
 import axios from 'axios';
-import { Eventdetails } from './Eventdetails';
 
 export const Find = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -12,10 +13,9 @@ export const Find = () => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const eventsPerPage = 9; // Changed from 10 to 9
+  const eventsPerPage = 9;
 
-  const navigate = useNavigate(); // Initialize navigate
-
+  const navigate = useNavigate();
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
@@ -36,7 +36,6 @@ export const Find = () => {
       const response = await axios.get("https://freedom-firebase-045.onrender.com/events");
       console.log('API Response:', response.data);
 
-      // Assuming the API response contains an array of events
       setEvents(response.data.events);
       setFilteredEvents(response.data.events);
       setIsLoading(false);
@@ -52,7 +51,7 @@ export const Find = () => {
   }, []);
 
   const filterEvents = useCallback(debounce((term) => {
-    setCurrentPage(1); // Reset to first page on search
+    setCurrentPage(1);
     if (term) {
       const filtered = events.filter(event => event.title.toLowerCase().includes(term.toLowerCase()));
       setFilteredEvents(filtered);
@@ -98,7 +97,7 @@ export const Find = () => {
             <h5>{event.title}</h5>
             <h6>Location: {event.location}</h6>
             <p>{event.description}</p>
-            <button className="details-button" onClick={() => navigate(`/eventDetails/${event.eventPlaner}`)} >Details</button>
+            <button className="details-button" onClick={() => navigate(`/eventDetails/${(event.title.toString())}`)} >Details</button>
           </div>
         ))}
       </div>

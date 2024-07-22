@@ -2,11 +2,10 @@ import express from'express';
 import EventModel from '../models/eventModel.js';
 const detailRouter = express.Router();
 
-
-// Route to fetch event details by title
-detailRouter.get('/title/:title', async (req, res) => {
+// Route to fetch event details by _id
+detailRouter.get('/:id', async (req, res) => {
   try {
-    const event = await EventModel.findOne({ title: req.params.title });
+    const event = await EventModel.findById(req.params.id);
 
     if (!event) {
       return res.status(404).json({ msg: 'Event not found' });
