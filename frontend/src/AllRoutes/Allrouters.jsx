@@ -20,7 +20,7 @@ export const Allrouters = () => {
         <Route path="/createEvents" element={<CreateEvents />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/eventdetails/:title" element={<Eventdetails />} />
+        <Route path="/eventdetails/:id" element={<Eventdetails />} />
       </Routes>
     </>
   );
